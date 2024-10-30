@@ -1,0 +1,29 @@
+{
+  "lock": false,
+  "tasks": {
+    "bundle": "deno task bundle:js & deno task bundle:css",
+    "bundle:js": "deno run --allow-env --allow-read --allow-run --allow-write bundle.ts",
+    "bundle:css": "deno run --allow-env --allow-sys --allow-read --allow-write npm:tailwindcss -i ./src/index.css -o ./public/styles.css",
+    "serve": "deno run --allow-net --allow-read jsr:@std/http@1/file-server public"
+  },
+  "imports": {
+    "@types/react": "https://esm.sh/@types/react@18.3.1",
+    "react": "https://esm.sh/react@18.3.1",
+    "react/jsx-runtime": "https://esm.sh/react@18.3.1/jsx-runtime",
+    "react-dom": "https://esm.sh/react-dom@18.3.1",
+    "react-dom/client": "https://esm.sh/react-dom@18.3.1/client"
+  },
+  "compilerOptions": {
+    "lib": [
+      "es2020",
+      "deno.window",
+      "deno.ns",
+      "dom",
+      "dom.iterable",
+      "dom.asynciterable"
+    ],
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
+    "jsxImportSourceTypes": "@types/react"
+  }
+}
