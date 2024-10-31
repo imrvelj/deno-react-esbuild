@@ -1,10 +1,15 @@
 {
   "lock": false,
   "tasks": {
-    "bundle": "deno task bundle:js & deno task bundle:css",
-    "bundle:js": "deno run --allow-env --allow-read --allow-run --allow-write bundle.ts",
+    "live-server": "deno run --allow-net --allow-read config/dev-server.ts",
+    "dev": "deno task live-server & deno task bundle:js:dev & deno task bundle:css:dev",
+    "bundle:js": "deno run --allow-env --allow-read --allow-run --allow-write config/bundle.ts",
+    "bundle:js:dev": "deno run --allow-env --allow-read --allow-run --allow-write config/dev-bundle.ts",
     "bundle:css": "deno run --allow-env --allow-sys --allow-read --allow-write npm:tailwindcss -i ./src/index.css -o ./public/styles.css",
-    "serve": "deno run --allow-net --allow-read jsr:@std/http@1/file-server public"
+    "bundle:css:dev": "deno run --watch --allow-env --allow-sys --allow-read --allow-write npm:tailwindcss -i ./src/index.css -o ./public/styles.css",
+    "serve": "deno run --allow-net --allow-read jsr:@std/http@1/file-server public",
+    "format": "deno fmt",
+    "lint": "deno lint"
   },
   "imports": {
     "@types/react": "https://esm.sh/@types/react@18.3.1",
@@ -25,5 +30,19 @@
     "jsx": "react-jsx",
     "jsxImportSource": "react",
     "jsxImportSourceTypes": "@types/react"
+  },
+  "fmt": {
+    "singleQuote": true,
+    "semiColons": false
+  },
+  "lint": {
+    "rules": {
+      "tags": [
+        "recommended"
+      ]
+    },
+    "exclude": [
+      "public/bundle.js"
+    ]
   }
 }
