@@ -7,4 +7,7 @@ deno + react + esbuild + tailwind. App is served from `public/`
 ```
 # bundle
 deno task bundle
+
+# live-reload server
+deno task dev
 ```
